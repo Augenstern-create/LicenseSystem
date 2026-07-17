@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "license_id": "2fd44c80-52ca-4b0a-9636-fd88b7d3cc0e",
+  "product_id": "image-sdk",
+  "edition": "enterprise",
+  "customer_id": "CUST-10086",
+  "issued_at": "2020-01-01T00:00:00Z",
+  "not_before": null,
+  "expires_at": "2099-12-31T23:59:59Z",
+  "maintenance_until": "2099-12-31T23:59:59Z",
+  "license_type": "site",
+  "features": {
+    "batch": true,
+    "deepzoom": true,
+    "gpu": true
+  },
+  "limits": {
+    "max_devices": 2,
+    "max_parallel_jobs": 8
+  },
+  "resource_scope": {
+    "device_ids": ["CAM-001", "CAM-002"],
+    "model_ids": ["M001", "M008"]
+  },
+  "machine_policy": null,
+  "min_app_version": null,
+  "max_app_version": null,
+  "revocation_epoch": 3,
+  "custom": {}
+}

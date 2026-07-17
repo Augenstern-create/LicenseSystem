@@ -1,0 +1,31 @@
+{
+  "warning": "公开测试向量，私钥已公开，绝不可用于生产",
+  "format_version": 1,
+  "domain_separator_utf8_escaped": "AUGENSTERN-LICENSE-V1\\0",
+  "key_id": "prod-2026-01",
+  "private_key_seed_hex": "0707070707070707070707070707070707070707070707070707070707070707",
+  "public_key_hex": "ea4a6c63e29c520abef5507b132ec5f9954776aebebe7b92421eea691446d22c",
+  "payload": {
+    "schema_version": 1,
+    "license_id": "2fd44c80-52ca-4b0a-9636-fd88b7d3cc0e",
+    "product_id": "image-sdk",
+    "edition": "enterprise",
+    "customer_id": "CUST-10086",
+    "issued_at": "2026-01-15T00:00:00Z",
+    "not_before": null,
+    "expires_at": "2027-01-15T08:00:00Z",
+    "maintenance_until": null,
+    "license_type": "site",
+    "features": { "gpu": true },
+    "limits": { "max_parallel_jobs": 8 },
+    "resource_scope": { "model_ids": ["M001", "M008"] },
+    "machine_policy": null,
+    "min_app_version": null,
+    "max_app_version": null,
+    "revocation_epoch": 3,
+    "custom": {}
+  },
+  "license_length": 237,
+  "license_sha256": "fe1a8b232d17bbe969d7f1fc80312f3a7da73a8bc766b6d290d655db9c7b836f",
+  "license_hex": "a60064414c49430101026745643235353139036c70726f642d323032362d3031045887b2000101502fd44c8052ca4b0a9636fd88b7d3cc0e0269696d6167652d73646b036a656e7465727072697365046a435553542d3130303836051a69682e0006f6071a6b49d20008f609040aa163677075f50ba1716d61785f706172616c6c656c5f6a6f6273080ca1696d6f64656c5f69647382644d303031644d3030380df60ef60ff6100311a0055840203a0ec4266378d7236f48e410af5de22d3d2831df0e26b86ad5eda273cee9182e26bbc3241e6f28b188347d07a14622e04ba269e816ff210e9c985a2a567401"
+}

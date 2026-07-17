@@ -1,6 +1,6 @@
 use aes_gcm::{
     Aes256Gcm, Nonce,
-    aead::{Aead, AeadCore, Generate, KeyInit},
+    aead::{Aead, Generate, KeyInit},
 };
 
 use base64::{
@@ -43,13 +43,13 @@ pub fn decrypt(encoded: &str) -> Result<Vec<u8>, String> {
 
     let (nonce_bytes, ciphertext) = encrypted.split_at(12);
 
-    let nonce = Nonce::from_slice(nonce_bytes);
+    let nonce = Nonce::try_from(nonce_bytes)
+        .map_err(|_| "AES nonce 长度不正确".to_string())?;
 
     cipher
-        .decrypt(nonce, ciphertext)
+        .decrypt(&nonce, ciphertext)
         .map_err(|_| {
             "解密失败：密钥错误或数据已被修改".to_string()
         })
 }
-
 

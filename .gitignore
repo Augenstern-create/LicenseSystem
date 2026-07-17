@@ -1,2 +1,11 @@
 /target
 /keys/*.key
+/keys/*private*.der
+/keys/*private*.pem
+/keys/*private*.pk8
+/licenses/*.lic
+/fuzz/artifacts
+/fuzz/corpus
+/fuzz/target
+/keys
+keys/*

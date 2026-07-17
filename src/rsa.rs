@@ -24,13 +24,6 @@ use sha2::Sha256;
 const RSA_PUBLIC_KEY_DER: &[u8] =
     include_bytes!("../keys/rsa_public.der");
 
-const LICENSE_PATH: &str =
-    "licenses/license.json";
-
-const SIGNATURE_PATH: &str =
-    "licenses/license_rsa.sig";
-
-
 pub fn verify_rsa_license(
     license_path: &str,
     signature_path: &str,

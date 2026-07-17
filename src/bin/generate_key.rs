@@ -6,7 +6,7 @@ use std::{
 
 use aes_gcm::{
     Aes256Gcm,
-    aead::{AeadCore, Generate, Key},
+    aead::{Generate, Key},
 };
 use p256::ecdsa::{SigningKey, VerifyingKey};
 use rand_core::OsRng;
@@ -82,7 +82,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     fs::write(
         private_key_path,
-        private_key_bytes.as_slice(),
+        private_key_bytes,
     )?;
 
     fs::write(
@@ -122,7 +122,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "公钥 DER 长度：{} 字节",
         public_der.as_ref().len()
     );
-    print_hex("Private Key", private_key_bytes.as_slice());
+    print_hex("Private Key", &private_key_bytes);
     print_hex("Public Key", public_key_bytes);
     print_hex("AES Key", key.as_slice());
     print_hex_preview(

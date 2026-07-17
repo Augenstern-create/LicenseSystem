@@ -1,0 +1,20 @@
+[package]
+name = "license-system-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+license_system = { package = "LicenseSystem", path = ".." }
+time = "0.3"
+
+[[bin]]
+name = "license_decode"
+path = "fuzz_targets/license_decode.rs"
+test = false
+doc = false
+bench = false
