@@ -9,3 +9,5 @@
 /fuzz/target
 /keys
 keys/*
+/docs
+docs/*

@@ -73,6 +73,13 @@
 - 新思路：删除末尾注释并在首个 `use` 前显式插入模块级文档；后续模块注释都使用文件首行上下文。
 - 验证办法：定向 rustfmt 成功，严格 rustdoc 能继续报告下一批 missing-docs。
 
+### README 快速开始引用未创建的治理签发文件
+
+- 现象：新用户完成普通密钥生成、签发和验证后，直接执行 README 的治理签发命令；示例中的 `request.json` 和 `keys/isolated-private.key` 实际不存在，CLI 在读取第一个参数时只返回操作系统 `NotFound`。如果改用已有 `licenses/dev.lic` 或 `licenses/payload.example.json` 作为输出，后续还会被“拒绝覆盖”策略拒绝。
+- 影响：README 声称提供快速开始，但没有覆盖空白 Windows 环境、仓库获取、MSVC/Rust 安装、治理请求生成和安全输出路径，新用户无法从头完成闭环；普通 Payload 也容易被误认为治理请求或 receipt。
+- 新思路：把 README 主路径重构为编号式 Windows PowerShell 教程：安装 Git、MSVC C++ Build Tools 与 Rust stable，验证工具链，获取并进入仓库，编译，生成全新的开发密钥，签发、验证并运行 SDK Demo。把治理签发移到独立进阶章节，使用 PowerShell 从 Payload 生成包含 `requested_by`/`approved_by` 的真实请求，并复用已生成开发密钥和全新输出文件。
+- 验证办法：在干净的临时演练目录使用 README 同等参数依次运行 keygen、issue、verify、sdk_demo 和 governed issue；再执行 Markdown 链接检查，确认命令参数、文件存在性和文档链接一致。
+
 后续遇到文档与实现不一致、rustdoc、链接或测试问题时，继续先记录现象、影响、方案和验证方法，再修改。
 
 ## 实现后同步
@@ -104,6 +111,15 @@
 - `scripts/check_markdown_links.ps1`：22 个 Markdown 文件、27 个本地链接、0 个失败。
 - `release_secret_audit.ps1 -AuditOnly`：扫描 117 个候选文件，只报告已知 `keys/rsa_private.der` blocker。
 - `git diff --check`：通过；Windows 行尾提示保持既有处理策略。
+
+### README 空白环境快速开始修订
+
+- 已把入口教程改为连续编号步骤，覆盖 Git、MSVC C++ Build Tools、Windows SDK、Rust stable、工具链确认、仓库获取和项目目录确认。
+- 基础闭环的所有文件具有明确来源：仓库提供 `licenses/payload.example.json`，教程生成 `quickstart-private.key`/`quickstart-public.key`，随后生成 `quickstart.lic` 并用于验签和 SDK Demo。
+- 治理签发已移入进阶章节；PowerShell 命令会生成新的 UUID、当前签发时间、30 天有效期及完整 `IssuanceRequest`，不再引用不存在的 `request.json` 或 `isolated-private.key`。
+- 已说明输出拒绝覆盖、教程文件的精确清理范围、KeyId 一致性、常见工具链错误和 Windows `linker stdout` 非失败提示。
+- 在 `target/readme-validation-<uuid>` 隔离目录按同等参数实测：keygen、普通 issue、verify、sdk_demo、governed issue、治理 License verify 全部成功；私钥/公钥均为 32 字节，治理结果为 `high_risk=false`。
+- 修订后 `scripts/check_markdown_links.ps1` 检查 22 个 Markdown、27 个本地链接、0 个失败；`git diff --check` 退出 0，仅保留既有 Windows LF/CRLF 提示。
 
 ### 偏差和维护责任
 
